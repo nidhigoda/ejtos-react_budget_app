@@ -5,7 +5,7 @@ export const AppReducer = (state, action) => {
     let budget = 0;
     switch (action.type) {
         case 'ADD_EXPENSE':
-            /*let total_budget = 0;
+            let total_budget = 0;
             total_budget = state.expenses.reduce(
                 (previousExp, currentExp) => {
                     return previousExp + currentExp.cost
@@ -20,17 +20,17 @@ export const AppReducer = (state, action) => {
                         currentExp.cost = action.payload.cost + currentExp.cost;
                     }
                     return currentExp
-                });*/
+                });
                 return {
                     ...state,
-                    expenses:[...state.expenses,action.payload],
+                    
                 };
-            /*} else {
+            } else {
                 alert("Cannot increase the allocation! Out of funds");
                 return {
                     ...state
                 }
-            }*/
+            }
             case 'RED_EXPENSE':
                 const red_expenses = state.expenses.map((currentExp)=> {
                     if (currentExp.name === action.payload.name && currentExp.cost - action.payload.cost >= 0) {
@@ -45,20 +45,19 @@ export const AppReducer = (state, action) => {
                     expenses: [...red_expenses],
                 };
             case 'DELETE_EXPENSE':
-           /* action.type = "DONE";
-            state.expenses.map((currentExp)=> {
-                if (currentExp.name === action.payload) {
-                    budget = state.budget + currentExp.cost
-                    currentExp.cost =  0;
-                }
-                return currentExp
-            })
-            action.type = "DONE";*/
-            return {
-                ...state,
-                expenses: state.expenses.filter((expense)=>expense.id !== action.payload),
-                
-            };
+                action.type = "DONE";
+                state.expenses.map((currentExp)=> {
+                    if (currentExp.name === action.payload) {
+                        budget = state.budget + currentExp.cost
+                        currentExp.cost =  0;
+                    }
+                    return currentExp
+                })
+                action.type = "DONE";
+                return {
+                    ...state,
+                    budget
+                };
         case 'SET_BUDGET':
             action.type = "DONE";
             state.budget = action.payload;
