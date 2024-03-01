@@ -4,12 +4,24 @@ import { AppContext } from '../context/AppContext';
 
 const ExpenseList=()=>{
     const {expenses}=useContext(AppContext);
+
+
     return(
-        <ul className='list-group'>
-            {expenses.map(((ex)=>(
-                <ExpenseItem id={ex.id} name={ex.name} cost={ex.cost}/>
-            )))}
-        </ul>
+       <table className='table'>
+        <thead className='thead-light'>
+            <tr>
+                <th scope="col">Department</th>
+                <th scope='col'>Allocated Budget</th>
+                <th scope='col'>Increase by 10</th>
+                 <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+           { expenses.map((expense)=>(
+                <ExpenseItem id={expense.id} key={expense.id} name={expense.name} cost={expense.cost} />
+            ))}
+        </tbody>
+       </table>
     )
 
 }
